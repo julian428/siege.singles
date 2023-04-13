@@ -1,8 +1,6 @@
-"use server";
-
 import Link from "next/link";
 
-export default async function LandingPage() {
+export default function LandingPage() {
   return (
     <>
       <header className="flex flex-col gap-2 w-full text-center py-8 items-center">
