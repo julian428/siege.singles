@@ -10,9 +10,7 @@
 
 1. ✅ landing
 2. ✅ login
-3. ❌ match
-4. ❌ chat
-5. ❌ chat/**_[chatId]_**
-6. ❌ profile/**_[userId]_**
-7. ❌ profile/**_[userId]_**/edit
-8. ❌ profile/**_[userId]_**/delete
+3. ❌ singles/match
+4. ❌ singles/chat
+5. ❌ singles/chat/**_[chatId]_**
+6. ❌ singles/profile/**_[userId]_**
