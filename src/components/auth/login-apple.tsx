@@ -1,11 +1,11 @@
 "use client";
 
-import { GoogleIcon, LoadingIcon } from "@/lib/icons";
+import { AppleIcon, LoadingIcon } from "@/lib/icons";
 import StandardButton from "../ui/button";
 import { useState } from "react";
 import { sleep } from "@/lib/utils";
 
-export default function LoginButtonGoogle() {
+export default function LoginButtonApple() {
   const [isLoading, setIsLoading] = useState(false);
   const googleLoginHanlder = async () => {
     setIsLoading(true);
@@ -23,8 +23,8 @@ export default function LoginButtonGoogle() {
       disabled={isLoading}
       onClick={googleLoginHanlder}
     >
-      {isLoading ? <LoadingIcon className="animate-spin" /> : <GoogleIcon />}{" "}
-      Google
+      {isLoading ? <LoadingIcon className="animate-spin" /> : <AppleIcon />}{" "}
+      Apple
     </StandardButton>
   );
 }

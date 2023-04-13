@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Siege singles",
+  title: "Siege Singles",
   description: "Hot rainbow six siege haters in your bombsite.",
 };
 

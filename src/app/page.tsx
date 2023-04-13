@@ -14,7 +14,7 @@ export default function LandingPage() {
           <span className="italic text-action">S</span>ingles
         </h1>
         <Link
-          href="/login"
+          href="/auth"
           className="border-2 hover:border-action px-4 py-1 text-xl rounded-lg mt-12 transition-colors duration-700"
         >
           <span className="text-secondary hover:text-action transition-colors">
