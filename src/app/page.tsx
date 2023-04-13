@@ -52,7 +52,7 @@ export default function LandingPage() {
             <i className="text-action">{process.env.NEXT_PUBLIC_CEO}</i>
           </section>
           <section>
-            <h4>Lead Developer:</h4>
+            <h4>CTO:</h4>
             <i className="text-action">{process.env.NEXT_PUBLIC_MAIN_DEV}</i>
           </section>
         </footer>
