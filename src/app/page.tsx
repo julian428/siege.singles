@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Siege Singles | About",
+};
+
 export default function LandingPage() {
   return (
     <>
