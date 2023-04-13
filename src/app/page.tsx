@@ -1,12 +1,36 @@
-export default function LandingPage() {
+"use server";
+
+import Link from "next/link";
+
+export default async function LandingPage() {
   return (
     <>
-      <header className="flex flex-col gap-2 w-full text-center py-8">
+      <header className="flex flex-col gap-2 w-full text-center py-8 items-center">
         <h2 className="text-h2 tracking-wide font-light">Welcome to</h2>
         <h1 className="text-h1 font-black text tracking-widest">
           <span className="italic text-action">S</span>iege{" "}
           <span className="italic text-action">S</span>ingles
         </h1>
+        <Link
+          href="/login"
+          className="border-2 hover:border-action px-4 py-1 text-xl rounded-lg mt-12 transition-colors duration-700"
+        >
+          <span className="text-secondary hover:text-action transition-colors">
+            L
+          </span>
+          <span className="text-secondary hover:text-action transition-colors">
+            O
+          </span>
+          <span className="text-secondary hover:text-action transition-colors">
+            G
+          </span>
+          <span className="text-secondary hover:text-action transition-colors">
+            I
+          </span>
+          <span className="text-secondary hover:text-action transition-colors">
+            N
+          </span>
+        </Link>
       </header>
       <main className="px-4 h-full w-full flex flex-col gap-24 text-xl font-medium tracking-wider items-center">
         <article className="max-w-6xl">
@@ -53,7 +77,7 @@ export default function LandingPage() {
           </section>
           <section>
             <h4>CTO:</h4>
-            <i className="text-action">{process.env.NEXT_PUBLIC_MAIN_DEV}</i>
+            <i className="text-action">{process.env.NEXT_PUBLIC_CTO}</i>
           </section>
         </footer>
       </main>
