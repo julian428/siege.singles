@@ -1,3 +1,4 @@
+import PageTitle from "@/components/ui/title";
 import Link from "next/link";
 
 export const metadata = {
@@ -9,10 +10,7 @@ export default function LandingPage() {
     <>
       <header className="flex flex-col gap-2 w-full text-center py-8 items-center">
         <h2 className="text-h2 tracking-wide font-light">Welcome to</h2>
-        <h1 className="text-h1 font-black text tracking-widest">
-          <span className="italic text-action">S</span>iege{" "}
-          <span className="italic text-action">S</span>ingles
-        </h1>
+        <PageTitle label="Siege Singles" />
         <Link
           href="/auth"
           className="border-2 hover:border-action px-4 py-1 text-xl rounded-lg mt-12 transition-colors duration-700"

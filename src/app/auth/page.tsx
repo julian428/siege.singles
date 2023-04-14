@@ -1,5 +1,6 @@
 import LoginButtonApple from "@/components/auth/login-apple";
 import LoginButtonGoogle from "@/components/auth/login-google";
+import PageTitle from "@/components/ui/title";
 import Image from "next/image";
 
 export const metadata = {
@@ -9,7 +10,10 @@ export const metadata = {
 export default function LoginPage() {
   return (
     <>
-      <h1 className="text-h1 text-center">Login</h1>
+      <PageTitle
+        className="text-center mt-8"
+        label="Login"
+      />
       <main className="flex flex-col items-center mt-24">
         <Image
           src={process.env.NEXT_PUBLIC_LOGO || ""}
