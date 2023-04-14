@@ -1,3 +1,3 @@
-export default function MatchPage() {
-  return <div>page</div>;
+export default async function MatchPage() {
+  return <div>Match with other players</div>;
 }

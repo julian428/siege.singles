@@ -1,31 +1,25 @@
-import LoginButtonApple from "@/components/auth/login-apple";
-import LoginButtonGoogle from "@/components/auth/login-google";
+import LoginForm from "@/components/auth/loginForm";
 import PageTitle from "@/components/ui/title";
-import Image from "next/image";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Siege Singles | login",
 };
 
-export default function LoginPage() {
+export default async function SignInPage() {
+  const session = await getServerSession(authOptions);
+  if (session) redirect("/singles/match");
+
   return (
     <>
       <PageTitle
         className="text-center mt-8"
         label="Login"
       />
-      <main className="flex flex-col items-center mt-24">
-        <Image
-          src={process.env.NEXT_PUBLIC_LOGO || ""}
-          alt="Siege Singles Logo"
-          className="pb-2 mb-8 border-b-2"
-          width={200}
-          height={100}
-        />
-        <nav className="flex flex-col gap-4">
-          <LoginButtonGoogle />
-          <LoginButtonApple />
-        </nav>
+      <main className="flex flex-col items-center mt-16">
+        <LoginForm />
       </main>
     </>
   );

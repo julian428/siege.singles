@@ -5,7 +5,7 @@ import { ButtonHTMLAttributes } from "react";
 
 //* button variants
 const defaultClasses: ClassValue =
-  "border-2 border-secondary text-secondary px-8 py-2 text-2xl flex items-center gap-4 rounded-lg";
+  "border-2 border-secondary text-secondary px-8 py-2 text-2xl flex items-center justify-center gap-4 w-fit rounded-lg";
 const buttonVariants = cva(defaultClasses, {
   variants: {
     variant: {

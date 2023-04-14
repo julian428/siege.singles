@@ -16,10 +16,15 @@ export default function PageTitle({ label, className, ...props }: Props) {
       className={cn("text-h1 font-black text tracking-widest", className)}
     >
       {labelCharacters.map((character, index) => {
-        if (index === 0 || labelCharacters[index - 1] === " ") {
-          return <span className="text-action italic">{character}</span>;
-        }
-        return <span>{character}</span>;
+        const isPrimary = index === 0 || labelCharacters[index - 1] === " ";
+        return (
+          <span
+            key={character + index}
+            className={isPrimary ? "text-action italic" : ""}
+          >
+            {character}
+          </span>
+        );
       })}
     </h1>
   );
