@@ -9,6 +9,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { LoadingIcon } from "@/lib/icons";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -94,6 +95,15 @@ export default function SignUpForm() {
         label="Profile description"
         {...register("description")}
       />
+      <footer className="flex gap-2">
+        <p>Already have an account?</p>
+        <Link
+          className="font-bold underline text-action"
+          href="/auth"
+        >
+          Login
+        </Link>
+      </footer>
       <StandardButton disabled={isLoading}>
         {isLoading ? <LoadingIcon className="animate-spin" /> : "SignUp"}
       </StandardButton>

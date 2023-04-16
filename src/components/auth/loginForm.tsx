@@ -7,6 +7,7 @@ import StandardInput from "../ui/input";
 import { LoadingIcon } from "@/lib/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function LoginForm() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -19,14 +20,19 @@ export default function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      await signIn("credentials", {
+      const response = await signIn("credentials", {
         email: emailRef.current?.value,
         password: passwordRef.current?.value,
         redirect: false,
       });
+      if (response?.error) throw new Error("Invalid email or password.");
       router.push("/singles/match");
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
