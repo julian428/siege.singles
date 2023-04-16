@@ -1,17 +1,8 @@
 //* ai icons
-import { AiOutlineLoading } from "react-icons/ai";
-
-//* ai exports
-export const LoadingIcon = AiOutlineLoading;
+export { AiOutlineLoading as LoadingIcon } from "react-icons/ai";
 
 //* fc icons
-import { FcGoogle } from "react-icons/fc";
-
-//* fc exports
-export const GoogleIcon = FcGoogle;
+export { FcGoogle as GoogleIcon } from "react-icons/fc";
 
 //* bs icons
-import { BsApple } from "react-icons/bs";
-
-//* bs exports
-export const AppleIcon = BsApple;
+export { BsApple as AppleIcon } from "react-icons/bs";
