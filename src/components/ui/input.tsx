@@ -1,7 +1,8 @@
+"use cleint";
+
 import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
 import { ClassValue } from "clsx";
-import { nanoid } from "nanoid";
 import { InputHTMLAttributes, LegacyRef, forwardRef } from "react";
 
 const defaultClasses: ClassValue =
@@ -27,7 +28,7 @@ export default forwardRef(function StandardInput(
   { label, className, variant, ...props }: Props,
   ref?: LegacyRef<HTMLInputElement>
 ) {
-  const uniqueId = label + "-" + nanoid();
+  const uniqueId = label.replaceAll(" ", "_");
 
   return (
     <section className="relative">

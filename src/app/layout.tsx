@@ -1,3 +1,4 @@
+import Providers from "@/components/providers";
 import "./globals.css";
 
 export const metadata = {
@@ -12,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-main text-secondary">{children}</body>
+      <body className="bg-main text-secondary">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

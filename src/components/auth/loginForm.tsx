@@ -5,22 +5,29 @@ import StandardButton from "../ui/button";
 import { signIn } from "next-auth/react";
 import StandardInput from "../ui/input";
 import { LoadingIcon } from "@/lib/icons";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const signInHandler = (event: FormEvent) => {
+  const signInHandler = async (event: FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
-    signIn("credentials", {
-      email: emailRef.current?.value,
-      password: passwordRef.current?.value,
-      redirect: true,
-      callbackUrl: "/singles/match",
-    });
+    try {
+      await signIn("credentials", {
+        email: emailRef.current?.value,
+        password: passwordRef.current?.value,
+        redirect: false,
+      });
+      router.push("/singles/match");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -30,16 +37,25 @@ export default function LoginForm() {
     >
       <StandardInput
         ref={emailRef}
-        label="email"
+        label="Email"
         type="email"
         required
       />
       <StandardInput
         ref={passwordRef}
-        label="password"
+        label="Password"
         type="password"
         required
       />
+      <footer className="flex gap-2">
+        <p>Don't have an account?</p>
+        <Link
+          className="font-bold underline text-action"
+          href="/auth/signup"
+        >
+          SignUp
+        </Link>
+      </footer>
       <StandardButton className="w-32 h-14">
         {isLoading ? (
           <LoadingIcon className="text-action animate-spin" />

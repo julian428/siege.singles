@@ -16,7 +16,7 @@ export default function PageTitle({ label, className, ...props }: Props) {
       className={cn("text-h1 font-black text tracking-widest", className)}
     >
       {labelCharacters.map((character, index) => {
-        const isPrimary = index === 0 || labelCharacters[index - 1] === " ";
+        const isPrimary = character === character.toUpperCase();
         return (
           <span
             key={character + index}
