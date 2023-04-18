@@ -54,7 +54,7 @@ export default function LoginForm() {
         required
       />
       <footer className="flex gap-2">
-        <p>Don't have an account?</p>
+        <p>{"Don't have an account?"}</p>
         <Link
           className="font-bold underline text-action"
           href="/auth/signup"
