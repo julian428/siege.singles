@@ -28,6 +28,7 @@ export default function SignUpForm() {
         password: data.password,
         redirect: false,
       });
+      await axios.post("/api/verify-email", { email: data.email });
       router.push("auth/verify");
     } catch (error) {
       if (error instanceof AxiosError) {

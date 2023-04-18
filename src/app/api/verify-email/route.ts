@@ -1,12 +1,25 @@
 import prisma from "@/lib/db";
 import mailer from "@/lib/send-mail";
 import { codeGen } from "@/lib/utils";
+import { ZodError, z } from "zod";
 
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
 
+    const isEmail = z.string().email("Invalid email").min(1);
+    isEmail.parse(email);
+
     const verificationCode = codeGen(6);
+
+    await prisma.user.update({
+      where: {
+        email,
+      },
+      data: {
+        AuthCode: verificationCode,
+      },
+    });
 
     await mailer({
       auth: {
@@ -23,11 +36,18 @@ export async function POST(request: Request) {
       receiver: email,
     });
 
-    return new Response(JSON.stringify(verificationCode));
+    return new Response("Sucessfully sent verification code");
   } catch (error) {
     if (error instanceof Error) {
-      return new Response("Something went wrong. Try again later.");
+      return new Response("Something went wrong. Try again later.", {
+        status: 500,
+      });
     }
-    return new Response("Couldn't send verification email. Try again later.");
+    if (error instanceof ZodError) {
+      return new Response(error.message, { status: 400 });
+    }
+    return new Response("Couldn't send verification email. Try again later.", {
+      status: 500,
+    });
   }
 }

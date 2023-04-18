@@ -1,5 +1,4 @@
 import prisma from "@/lib/db";
-import { codeGen } from "@/lib/utils";
 import { signupSchema } from "@/validators/valid-signup";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
@@ -17,11 +16,13 @@ interface signupData {
 export async function POST(req: Request) {
   try {
     let data = (await req.json()) as signupData;
+
     const { name, email, password, username, description } =
       signupSchema.parse(data);
     if (!data.image) {
       data.image = "";
     }
+
     await prisma.user.create({
       data: {
         name,
@@ -30,9 +31,9 @@ export async function POST(req: Request) {
         username,
         description,
         image: data.image,
-        AuthCode: codeGen(6),
       },
     });
+
     return new Response("Created user", { status: 201 });
   } catch (error) {
     if (error instanceof ZodError) {
