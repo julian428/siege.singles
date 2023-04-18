@@ -5,19 +5,17 @@ import InputNode from "./inputNode";
 import StandardButton from "../ui/button";
 import { LoaderIcon, toast } from "react-hot-toast";
 import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
+import ResendEmailButton from "./ResendEmailButton";
 
 interface Props {
   email: string | null | undefined;
 }
 
 export default function VerifyEmailForm({ email }: Props) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch, setFocus } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-
-  const router = useRouter();
 
   const submitHandler = async (data: FieldValues) => {
     setIsLoading(true);
@@ -26,6 +24,8 @@ export default function VerifyEmailForm({ email }: Props) {
     for (const c in data) {
       inputCode += data[c];
     }
+
+    inputCode = inputCode.toLowerCase();
 
     try {
       await axios.post("/api/verify-email/finish", { email, inputCode });
@@ -40,10 +40,31 @@ export default function VerifyEmailForm({ email }: Props) {
     }
   };
 
+  const resendEmail = async () => {
+    await axios.post("/api/verify-email", { email });
+    toast.success("Email resent.");
+  };
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      const index = parseInt(name!.charAt(name!.length - 1)!);
+      if (!value[name!]) {
+        if (index === 1) return;
+        const focusto = `number${(index - 1).toString()}`;
+        setFocus(focusto);
+      } else {
+        if (index === 6) return;
+        const focusto = `number${(index + 1).toString()}`;
+        setFocus(focusto);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="w-fit flex flex-col gap-16"
+      className="w-fit flex flex-col gap-32"
     >
       <section className="flex gap-8 justify-center mt-24">
         <InputNode {...register("number1")} />
@@ -54,13 +75,7 @@ export default function VerifyEmailForm({ email }: Props) {
         <InputNode {...register("number6")} />
       </section>
       <nav className="flex justify-evenly">
-        <StandardButton
-          className="w-56"
-          type="button"
-          disabled={isLoading}
-        >
-          Resend Email
-        </StandardButton>
+        <ResendEmailButton afterTimer={resendEmail} />
         <StandardButton
           disabled={isLoading}
           className="w-56"
