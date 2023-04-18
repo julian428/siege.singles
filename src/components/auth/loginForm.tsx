@@ -26,12 +26,12 @@ export default function LoginForm() {
         redirect: false,
       });
       if (response?.error) throw new Error("Invalid email or password.");
+      toast.success("Logged in.");
       router.push("/singles/match");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
       }
-    } finally {
       setIsLoading(false);
     }
   };

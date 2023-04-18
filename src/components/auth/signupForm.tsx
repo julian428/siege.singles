@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { LoadingIcon } from "@/lib/icons";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +22,13 @@ export default function SignUpForm() {
     setIsLoading(true);
     try {
       await axios.post("/api/signup", data);
+      toast.success("Successfully created user.");
+      signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+      router.push("auth/verify");
     } catch (error) {
       if (error instanceof AxiosError) {
         const e = error.response?.data as any;
@@ -38,9 +46,10 @@ export default function SignUpForm() {
             toast.error("Something went wrong. Please try again later.");
           }
         }
+      } else {
+        toast.error("Something went wrong.");
       }
-    } finally {
-      router.push("/auth");
+      setIsLoading(false);
     }
   };
 
@@ -53,7 +62,6 @@ export default function SignUpForm() {
         label="Visible name"
         autoComplete="off"
         required
-        disabled={isLoading}
         min={3}
         max={21}
         {...register("name")}
@@ -61,13 +69,11 @@ export default function SignUpForm() {
       <StandardInput
         label="Email"
         required
-        disabled={isLoading}
         type="email"
         {...register("email")}
       />
       <StandardInput
         label="Password"
-        disabled={isLoading}
         required
         type="password"
         minLength={8}
@@ -76,12 +82,10 @@ export default function SignUpForm() {
       />
       <StandardInput
         label="Link to profile image"
-        disabled={isLoading}
         {...register("image")}
       />
       <StandardInput
         required
-        disabled={isLoading}
         label="r6 username"
         maxLength={256}
         autoComplete="off"
@@ -91,7 +95,6 @@ export default function SignUpForm() {
         rows={3}
         required
         maxLength={256}
-        disabled={isLoading}
         label="Profile description"
         {...register("description")}
       />

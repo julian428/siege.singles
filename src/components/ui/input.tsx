@@ -1,5 +1,3 @@
-"use cleint";
-
 import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
 import { ClassValue } from "clsx";
@@ -28,7 +26,7 @@ export default forwardRef(function StandardInput(
   { label, className, variant, ...props }: Props,
   ref?: LegacyRef<HTMLInputElement>
 ) {
-  const uniqueId = label.replaceAll(" ", "_");
+  const uniqueId = label.replaceAll(" ", "_") + Math.random();
 
   return (
     <section className="relative">

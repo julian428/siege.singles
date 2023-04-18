@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { codeGen } from "@/lib/utils";
 import { signupSchema } from "@/validators/valid-signup";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
@@ -29,6 +30,7 @@ export async function POST(req: Request) {
         username,
         description,
         image: data.image,
+        AuthCode: codeGen(6),
       },
     });
     return new Response("Created user", { status: 201 });

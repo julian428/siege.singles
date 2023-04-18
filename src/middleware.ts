@@ -6,19 +6,23 @@ export default withAuth(
   async function middleware(req) {
     const pathname = req.nextUrl.pathname;
 
-    const isAuth = await getToken({ req });
+    const isAuth = (await getToken({ req })) as any;
 
-    const isLoginPage = pathname.startsWith("/auth");
-    const isSignUpPage = pathname.startsWith("/auth/signup");
+    if (pathname === "/") {
+      return NextResponse.next();
+    }
+
+    const isOnAuth = pathname.startsWith("/auth");
 
     const sensitiveRoutes = ["/singles"];
     const isAccessingSensitiveRoutes = sensitiveRoutes.some((route) =>
       pathname.startsWith(route)
     );
 
-    if (isLoginPage || isSignUpPage) {
-      if (isAuth)
+    if (isOnAuth) {
+      if (isAuth) {
         return NextResponse.redirect(new URL("/singles/match", req.url));
+      }
       return NextResponse.next();
     }
 
@@ -38,5 +42,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/", "/auth", "/auth/signup", "/singles/:path*"],
+  matcher: ["/", "/auth", "/auth/verify", "/auth/signup", "/singles/:path*"],
 };

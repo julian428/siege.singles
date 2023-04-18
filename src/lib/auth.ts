@@ -52,6 +52,7 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           friendIds: user.friendIds,
           image: user.image,
+          active: user.active,
         };
       },
     }),
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
           name: token.name,
           friendIds: token.friendIds,
           image: token.image as string,
+          active: token.active,
         },
       };
     },
@@ -83,6 +85,7 @@ export const authOptions: NextAuthOptions = {
         username: u.username,
         friendIds: u.friendIds,
         image: u.image,
+        active: u.active,
       };
     },
   },

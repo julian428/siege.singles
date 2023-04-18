@@ -18,5 +18,7 @@ model User {
   password    String
   image       String
   description String
+  active      Boolean  @default(false)
   friendIds   String[]
+  AuthCode    String?
 }
