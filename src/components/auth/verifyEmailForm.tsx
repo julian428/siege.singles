@@ -59,7 +59,7 @@ export default function VerifyEmailForm({ email }: Props) {
       }
     });
     return () => subscription.unsubscribe();
-  }, [watch]);
+  }, [watch, setFocus]);
 
   return (
     <form
