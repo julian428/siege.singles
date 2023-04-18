@@ -16,9 +16,6 @@ export async function POST(request: Request) {
       where: {
         email,
       },
-      select: {
-        AuthCode: true,
-      },
     });
 
     if (data?.AuthCode !== inputCode) {
