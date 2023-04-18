@@ -12,27 +12,32 @@ export default withAuth(
       return NextResponse.next();
     }
 
-    const isOnAuth = pathname.startsWith("/auth");
-
+    const firstAuthPages = ["/auth", "/auth/signup"];
     const sensitiveRoutes = ["/singles"];
-    const isAccessingSensitiveRoutes = sensitiveRoutes.some((route) =>
+
+    const accessingVerificationPage = pathname === "/auth/verify";
+    const accessingAuthPages = firstAuthPages.some((page) => pathname === page);
+    const accessingSensitiveRoutes = sensitiveRoutes.some((route) =>
       pathname.startsWith(route)
     );
 
-    if (isOnAuth) {
-      if (isAuth) {
-        return NextResponse.redirect(new URL("/singles/match", req.url));
-      }
-      return NextResponse.next();
+    if (isAuth && !isAuth.active && !accessingVerificationPage) {
+      return NextResponse.redirect(new URL("/auth/verify", req.url));
     }
 
-    if (!isAuth && isAccessingSensitiveRoutes) {
+    if (accessingSensitiveRoutes && !isAuth) {
       return NextResponse.redirect(new URL("/auth", req.url));
+    }
+
+    if (accessingAuthPages && isAuth) {
+      return NextResponse.redirect(new URL("/singles/match", req.url));
     }
 
     if (pathname === "/singles") {
       return NextResponse.redirect(new URL("/singles/match", req.url));
     }
+
+    return NextResponse.next();
   },
   {
     callbacks: {
