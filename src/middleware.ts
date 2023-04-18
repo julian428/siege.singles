@@ -25,7 +25,11 @@ export default withAuth(
       return NextResponse.redirect(new URL("/auth/verify", req.url));
     }
 
-    if (accessingSensitiveRoutes && !isAuth) {
+    if (isAuth && isAuth.active && accessingVerificationPage) {
+      return NextResponse.redirect(new URL("/singles/match", req.url));
+    }
+
+    if ((accessingSensitiveRoutes || accessingVerificationPage) && !isAuth) {
       return NextResponse.redirect(new URL("/auth", req.url));
     }
 
