@@ -1,11 +1,16 @@
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import SignOutButton from "@/components/ui/signOut-button";
 
 export const metadata = {
   title: "Sige Singles | match",
 };
 
 export default async function MatchPage() {
-  const session = await getServerSession(authOptions);
-  return <div>{session!.user?.email}</div>;
+  return (
+    <>
+      <p className="text-red-500 text-center text-2xl my-8">Comming soon...</p>
+      <center>
+        <SignOutButton />
+      </center>
+    </>
+  );
 }

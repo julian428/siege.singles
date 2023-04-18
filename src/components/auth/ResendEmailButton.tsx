@@ -47,7 +47,7 @@ export default function ResendEmailButton({ afterTimer }: Props) {
   return (
     <section className="relative">
       <StandardButton
-        className={`w-56 ${
+        className={`w-56 h-14 ${
           timerActive && "opacity-30 border-action cursor-not-allowed"
         }`}
         onClick={clickHandler}

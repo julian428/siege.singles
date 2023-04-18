@@ -66,7 +66,7 @@ export default function VerifyEmailForm({ email }: Props) {
       onSubmit={handleSubmit(submitHandler)}
       className="w-fit flex flex-col gap-32"
     >
-      <section className="flex gap-8 justify-center mt-24">
+      <section className="flex  gap-2 md:gap-8 justify-center mt-24">
         <InputNode {...register("number1")} />
         <InputNode {...register("number2")} />
         <InputNode {...register("number3")} />
@@ -74,11 +74,11 @@ export default function VerifyEmailForm({ email }: Props) {
         <InputNode {...register("number5")} />
         <InputNode {...register("number6")} />
       </section>
-      <nav className="flex justify-evenly">
+      <nav className="flex flex-col-reverse md:flex-row items-center gap-8 justify-evenly">
         <ResendEmailButton afterTimer={resendEmail} />
         <StandardButton
           disabled={isLoading}
-          className="w-56"
+          className="w-56 h-14"
         >
           {isLoading ? <LoaderIcon className="animate-spin" /> : "Verify Code"}
         </StandardButton>
