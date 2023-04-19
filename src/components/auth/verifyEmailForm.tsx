@@ -61,6 +61,10 @@ export default function VerifyEmailForm({ email }: Props) {
     return () => subscription.unsubscribe();
   }, [watch, setFocus]);
 
+  useEffect(() => {
+    axios.post("/api/verify-email", { email });
+  }, []);
+
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}

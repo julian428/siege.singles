@@ -1,6 +1,7 @@
 import VerifyEmailForm from "@/components/auth/verifyEmailForm";
 import PageTitle from "@/components/ui/title";
 import { authOptions } from "@/lib/auth";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 
 export const metadata = {
