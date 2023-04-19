@@ -11,6 +11,7 @@ import { LoadingIcon } from "@/lib/icons";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { sleep } from "@/lib/utils";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +29,7 @@ export default function SignUpForm() {
         password: data.password,
         redirect: false,
       });
+      await sleep(1000);
       window.location.reload();
     } catch (error) {
       if (error instanceof AxiosError) {
