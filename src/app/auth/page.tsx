@@ -2,7 +2,6 @@ import LoginForm from "@/components/auth/loginForm";
 import PageTitle from "@/components/ui/title";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Siege Singles | login",

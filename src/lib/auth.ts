@@ -59,6 +59,8 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session: ({ session, token }) => {
+      console.log("cb-session-token", token);
+      console.log("cb-session", session);
       return {
         ...session,
         user: {
@@ -74,6 +76,8 @@ export const authOptions: NextAuthOptions = {
       };
     },
     jwt: ({ token, user }) => {
+      console.log("cb-token", token);
+      console.log("cb-user", user);
       if (!user) return token;
 
       const u = user as unknown as User;
