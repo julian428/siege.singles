@@ -29,7 +29,6 @@ export default function SignUpForm() {
         password: data.password,
         redirect: false,
       });
-      await sleep(1000);
       window.location.reload();
     } catch (error) {
       if (error instanceof AxiosError) {
