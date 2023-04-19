@@ -12,11 +12,14 @@ export async function POST(request: Request) {
       });
     }
 
-    const { authcode } = (await prisma.user.findUniqueOrThrow({
+    const { authcode } = await prisma.user.findUniqueOrThrow({
       where: {
         email,
       },
-    })) as any;
+      select: {
+        authcode: true,
+      },
+    });
 
     if (authcode !== inputCode) {
       return new Response("The verification code doesn't match.", {
