@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function SignInPage() {
   const session = await getServerSession(authOptions);
-  if (session) redirect("/singles/match");
+  console.log("session: ", session);
 
   return (
     <>
