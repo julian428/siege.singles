@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       authorize: async (credentials) => {
+        console.log("authorizing...");
         if (!credentials?.email || !credentials.password) {
           return null;
         }
@@ -43,6 +44,17 @@ export const authOptions: NextAuthOptions = {
         if (!isPasswordValid) {
           return null;
         }
+
+        console.log("authorized with: ", {
+          id: user.id.toString(),
+          email: user.email,
+          description: user.description,
+          username: user.username,
+          name: user.name,
+          friendIds: user.friendIds,
+          image: user.image,
+          active: user.active,
+        });
 
         return {
           id: user.id.toString(),
