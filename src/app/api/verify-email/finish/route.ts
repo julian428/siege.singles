@@ -12,13 +12,13 @@ export async function POST(request: Request) {
       });
     }
 
-    const { AuthCode } = (await prisma.user.findUniqueOrThrow({
+    const { authcode } = (await prisma.user.findUniqueOrThrow({
       where: {
         email,
       },
     })) as any;
 
-    if (AuthCode !== inputCode) {
+    if (authcode !== inputCode) {
       return new Response("The verification code doesn't match.", {
         status: 400,
       });
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         email,
       },
       data: {
-        AuthCode: null,
+        authcode: null,
         active: true,
       },
     });

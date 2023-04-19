@@ -20,5 +20,5 @@ model User {
   description String
   active      Boolean  @default(false)
   friendIds   String[]
-  AuthCode    String?
+  authcode    String?
 }

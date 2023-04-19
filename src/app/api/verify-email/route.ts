@@ -17,7 +17,7 @@ export async function POST(request: Request) {
         email,
       },
       data: {
-        AuthCode: verificationCode,
+        authcode: verificationCode,
       },
     });
 
