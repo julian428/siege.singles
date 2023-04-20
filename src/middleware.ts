@@ -7,7 +7,6 @@ export default withAuth(
     const pathname = req.nextUrl.pathname;
 
     const isAuth = (await getToken({ req })) as any;
-    console.log("userdata: ", isAuth);
 
     if (pathname === "/") {
       return NextResponse.next();

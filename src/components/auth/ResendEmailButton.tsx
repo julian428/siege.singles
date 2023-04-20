@@ -21,7 +21,6 @@ export default function ResendEmailButton({ afterTimer }: Props) {
       await afterTimer();
       setTimerActive(true);
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong. Try again later.");
     } finally {
       setIsLoading(false);

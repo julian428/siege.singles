@@ -32,7 +32,6 @@ export default function VerifyEmailForm({ email }: Props) {
       toast.success("Successfully verified email.");
       signOut();
     } catch (error) {
-      console.log(error);
       if (error instanceof AxiosError) {
         toast.error(error.response?.data);
       }

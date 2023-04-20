@@ -10,7 +10,6 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     CredentialProvider({
-      name: "Sign in",
       credentials: {
         email: {
           label: "Email",
@@ -59,8 +58,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session: ({ session, token }) => {
-      console.log("cb-session-token", token);
-      console.log("cb-session", session);
       return {
         ...session,
         user: {
