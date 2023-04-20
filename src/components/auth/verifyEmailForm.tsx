@@ -62,7 +62,7 @@ export default function VerifyEmailForm({ email }: Props) {
 
   useEffect(() => {
     axios.post("/api/verify-email", { email });
-  }, []);
+  }, [email]);
 
   return (
     <form
