@@ -29,7 +29,7 @@ export default function SignUpForm() {
         password: data.password,
         redirect: false,
       });
-      window.location.reload();
+      router.push("/auth/verify");
     } catch (error) {
       if (error instanceof AxiosError) {
         const e = error.response?.data as any;

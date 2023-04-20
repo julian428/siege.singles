@@ -5,7 +5,12 @@ const nextConfig = {
     serverComponentsExternalPackages: ['bcrypt', '@prisma/client', 'fs', "@mapbox"],
   },
   images: {
-    domains: ["cdn.discordapp.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      }
+    ]
   },
 }
 

@@ -9,7 +9,9 @@ export default function SinglesLayout({ children }: Props) {
   return (
     <main className="flex h-screen overflow-hidden">
       <SinglesNav />
-      <article className="overflow-y-auto max-h-screen">{children}</article>
+      <article className="overflow-y-auto max-h-screen w-full">
+        {children}
+      </article>
     </main>
   );
 }

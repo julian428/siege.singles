@@ -26,7 +26,7 @@ export default forwardRef(function StandardInput(
   { label, className, variant, ...props }: Props,
   ref?: LegacyRef<HTMLInputElement>
 ) {
-  const uniqueId = label.replaceAll(" ", "_") + Math.random();
+  const uniqueId = label.replaceAll(" ", "_");
 
   return (
     <section className="relative">

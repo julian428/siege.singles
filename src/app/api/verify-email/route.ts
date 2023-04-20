@@ -21,6 +21,8 @@ export async function POST(request: Request) {
       },
     });
 
+    prisma.$disconnect();
+
     await mailer({
       auth: {
         pass: process.env.EMAIL_PASSWORD!,

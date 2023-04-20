@@ -31,6 +31,9 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
+
+        prisma.$disconnect();
+
         if (!user) {
           return null;
         }

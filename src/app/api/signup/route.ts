@@ -34,6 +34,8 @@ export async function POST(req: Request) {
       },
     });
 
+    prisma.$disconnect();
+
     return new Response("Created user", { status: 201 });
   } catch (error) {
     if (error instanceof ZodError) {
