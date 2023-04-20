@@ -1,8 +1,19 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import StandardButton from "./button";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
-export default function SignOutButton() {
-  return <StandardButton onClick={() => signOut()}>SignOut</StandardButton>;
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+}
+
+export default function SignOutButton({ children, ...props }: Props) {
+  return (
+    <button
+      {...props}
+      onClick={() => signOut()}
+    >
+      {children}
+    </button>
+  );
 }
