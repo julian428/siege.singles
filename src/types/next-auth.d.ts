@@ -8,7 +8,6 @@ declare module "next-auth" {
       description: string;
       username: string;
       name: string;
-      friendIds: string[];
       image: string;
       active: boolean;
     };
