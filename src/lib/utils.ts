@@ -28,25 +28,3 @@ export function formatTime(seconds: number) {
 
   return `${formattedMinutes}:${formattedSeconds}`;
 }
-
-export async function getNonFriend(uid: string, friends: string[]) {
-  const intFriends = friends.map((id) => parseInt(id));
-  const nonFriend = await prisma.user.findFirst({
-    where: {
-      id: { not: parseInt(uid) },
-      active: true,
-      NOT: {
-        id: { in: intFriends },
-        friendIds: { hasSome: uid },
-      },
-    },
-    select: {
-      name: true,
-      username: true,
-      image: true,
-      description: true,
-    },
-  });
-  prisma.$disconnect();
-  return nonFriend;
-}
