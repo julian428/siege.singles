@@ -22,6 +22,7 @@ export default async function ChatPage({ params }: Props) {
     select: {
       User: {
         select: {
+          id: true,
           name: true,
           image: true,
         },
@@ -33,7 +34,10 @@ export default async function ChatPage({ params }: Props) {
   await prisma.$disconnect();
   return (
     <article className="h-screen flex flex-col flex-grow">
-      <Messages />
+      <Messages
+        initialMessages={messages}
+        uid={session.user.id}
+      />
       <WriteMessage
         uid={session.user.id}
         cid={params.chatId}

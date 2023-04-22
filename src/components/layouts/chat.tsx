@@ -17,7 +17,7 @@ export default function ChatNav({ friend, stats }: Props) {
           alt={`${friend.name} profile picture`}
           width={100}
           height={100}
-          className="rounded-full"
+          className="rounded-full w-32 h-32"
         />
         <h2 className="text-center capitalize text-3xl">{friend.name}</h2>
       </header>
