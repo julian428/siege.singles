@@ -24,8 +24,8 @@ export default function Swiper({ name, uid, pid }: Props) {
         <HateIcon />
       </button>
       <h3 className="text-3xl">{name}</h3>
-      <button>
-        <LikeIcon onClick={likeHandler} />
+      <button onClick={likeHandler}>
+        <LikeIcon />
       </button>
     </nav>
   );
