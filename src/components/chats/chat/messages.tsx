@@ -19,7 +19,7 @@ interface Props {
 export default function Messages({ initialMessages, uid }: Props) {
   const [messages, setMessages] = useState(initialMessages);
   return (
-    <article className="h-full w-full p-4">
+    <article className="h-full w-full p-4 flex flex-col gap-8 max-h-full overflow-y-auto">
       {messages.map((message) => (
         <Message
           key={message.createdat + ""}
