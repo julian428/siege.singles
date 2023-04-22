@@ -8,6 +8,7 @@ import type { Session } from "next-auth";
 import axios from "axios";
 
 interface NonFriendType {
+  id: number;
   name: string;
   username: string;
   image: string;
@@ -19,20 +20,26 @@ interface Props {
 }
 
 export default function Card({ session }: Props) {
-  const [user, setUser] = useState<NonFriendType | null>(null);
+  const [user, setUser] = useState<NonFriendType | null | undefined>(undefined);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.post("/api/get-nonFriend", {
-        uid: session.user.id,
+      const res = await axios({
+        method: "post",
+        url: `/api/get-nonFriend?${new Date().getTime()}`,
+        data: { uid: session.user.id },
       });
       setUser(res.data);
     };
     fetchUser();
   }, [session]);
 
-  if (!user) {
+  if (user === undefined) {
     return <LoaderIcon className="animate-spin" />;
+  }
+
+  if (user === null) {
+    return <p>No more users to match with.</p>;
   }
 
   return (
@@ -43,14 +50,15 @@ export default function Card({ session }: Props) {
           alt={`${user.name} profile picture`}
           fill
         />
-        <section className="absolute top-0 left-1/2 text-center text-3xl -translate-x-1/2 pt-2">
-          {user.name}
-        </section>
         <section className="absolute bottom-0 w-full bg-main bg-opacity-50 text-center">
           {user.description}
         </section>
       </article>
-      <Swiper />
+      <Swiper
+        name={user.name}
+        uid={parseInt(session.user.id)}
+        pid={user.id}
+      />
     </div>
   );
 }

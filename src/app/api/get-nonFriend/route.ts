@@ -1,17 +1,24 @@
 import prisma from "@/lib/db";
 
-async function getNonFriend(uid: string, friends: string[]) {
+async function getNonFriend(
+  uid: string,
+  friends: string[],
+  disliked: string[]
+) {
   const intFriends = friends.map((id) => parseInt(id));
+  const intDisliked = disliked.map((id) => parseInt(id));
   const nonFriend = await prisma.user.findFirst({
     where: {
-      id: { not: parseInt(uid) },
+      id: { not: parseInt(uid), notIn: intDisliked },
       active: true,
       NOT: {
         id: { in: intFriends },
         friendIds: { hasSome: uid },
+        dislikedIds: { hasSome: uid },
       },
     },
     select: {
+      id: true,
       name: true,
       username: true,
       image: true,
@@ -33,6 +40,7 @@ export async function POST(req: Request) {
       },
       select: {
         friendIds: true,
+        dislikedIds: true,
       },
     });
 
@@ -41,7 +49,7 @@ export async function POST(req: Request) {
         status: 401,
       });
 
-    const nonFriend = await getNonFriend(uid, user.friendIds);
+    const nonFriend = await getNonFriend(uid, user.friendIds, user.dislikedIds);
 
     return new Response(JSON.stringify(nonFriend));
   } catch (error) {

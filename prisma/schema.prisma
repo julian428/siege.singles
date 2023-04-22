@@ -20,5 +20,6 @@ model User {
   description String
   active      Boolean  @default(false)
   friendIds   String[]
+  dislikedIds String[]
   authcode    String?
 }
