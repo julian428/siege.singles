@@ -37,7 +37,7 @@ export async function POST(request: Request) {
       },
     });
 
-    prisma.$disconnect();
+    await prisma.$disconnect();
 
     return new Response("Successfully verified email");
   } catch (error) {

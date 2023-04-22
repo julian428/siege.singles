@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       },
     });
 
-    prisma.$disconnect();
+    await prisma.$disconnect();
 
     await mailer({
       auth: {

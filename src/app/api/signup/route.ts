@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       },
     });
 
-    prisma.$disconnect();
+    await prisma.$disconnect();
 
     return new Response("Created user", { status: 201 });
   } catch (error) {

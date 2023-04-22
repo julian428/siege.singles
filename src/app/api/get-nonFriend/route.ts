@@ -25,7 +25,7 @@ async function getNonFriend(
       description: true,
     },
   });
-  prisma.$disconnect();
+  await prisma.$disconnect();
   return nonFriend;
 }
 
@@ -43,6 +43,8 @@ export async function POST(req: Request) {
         dislikedIds: true,
       },
     });
+
+    await prisma.$disconnect();
 
     if (!user)
       return new Response("Something went wrong please log in again.", {

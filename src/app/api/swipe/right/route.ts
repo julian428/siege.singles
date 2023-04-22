@@ -19,6 +19,28 @@ export async function POST(req: Request) {
         },
       },
     });
+
+    const player = await prisma.user.findUnique({
+      where: {
+        id: pid,
+      },
+      select: {
+        friendIds: true,
+      },
+    });
+
+    if (player?.friendIds.includes(uid.toString())) {
+      await prisma.chat.create({
+        data: {
+          users: {
+            connect: [{ id: pid }, { id: uid }],
+          },
+        },
+      });
+    }
+
+    await prisma.$disconnect();
+
     return new Response("Added player to friends.");
   } catch (error) {
     return new Response("Couldn't update user.", { status: 500 });

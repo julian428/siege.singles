@@ -11,15 +11,33 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
-  name        String   @unique
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  name        String    @unique
   username    String
   password    String
   image       String
   description String
-  active      Boolean  @default(false)
+  active      Boolean   @default(false)
+  authcode    String?
   friendIds   String[]
   dislikedIds String[]
-  authcode    String?
+  messages    Message[]
+  chats       Chat[]    @relation("ChatUsers")
+}
+
+model Chat {
+  id       String    @id @default(uuid())
+  messages Message[]
+  users    User[]    @relation("ChatUsers")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  createdat DateTime @default(now())
+  message   String
+  User      User?    @relation(fields: [userId], references: [id])
+  Chat      Chat?    @relation(fields: [chatId], references: [id])
+  chatId    String?
+  userId    Int?
 }

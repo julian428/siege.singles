@@ -20,6 +20,9 @@ export async function POST(req: Request) {
         },
       },
     });
+
+    await prisma.$disconnect();
+
     return new Response("Added players to disliked group");
   } catch (error) {
     return new Response("Couldn't update user. Please try again later.", {

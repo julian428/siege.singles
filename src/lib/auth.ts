@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        prisma.$disconnect();
+        await prisma.$disconnect();
 
         if (!user) {
           return null;
