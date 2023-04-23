@@ -17,7 +17,7 @@ export default async function ChatPage({ params }: Props) {
       chatId: params.chatId,
     },
     orderBy: {
-      createdat: "asc",
+      createdat: "desc",
     },
     select: {
       User: {
