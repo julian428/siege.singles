@@ -1,20 +1,38 @@
-import { authOptions } from "@/lib/auth";
+import prisma from "@/lib/db";
 import { DeathIcon, GameIcon, KillIcon, TimeIcon, WinIcon } from "@/lib/icons";
 import getStats from "@/lib/stats";
-import { type Session, getServerSession } from "next-auth";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
-export default async function ProfilePage() {
-  const session = (await getServerSession(authOptions)) as Session;
-  const stats = await getStats(session.user.username);
+interface Props {
+  params: {
+    profileName: string;
+  };
+}
+
+export default async function ProfilePage({ params }: Props) {
+  const profile = await prisma.user.findUnique({
+    where: {
+      name: params.profileName,
+    },
+    select: {
+      username: true,
+      name: true,
+      image: true,
+      description: true,
+    },
+  });
+  await prisma.$disconnect();
+  if (!profile) notFound();
+  const stats = await getStats(profile.username);
   return (
     <article>
       <header className="h-64 w-full bg-action relative">
         <div className="absolute flex -bottom-14 right-4 items-center gap-8">
-          <h1 className="text-6xl">{session.user.name}</h1>
+          <h1 className="text-6xl">{profile.name}</h1>
           <Image
-            src={session.user.image}
-            alt={session.user.name + " profile picture"}
+            src={profile.image}
+            alt={profile.name + " profile picture"}
             width={100}
             height={100}
             className="rounded-full w-48 h-48"
@@ -24,7 +42,7 @@ export default async function ProfilePage() {
       <article className="font-mono text-xl flex justify-evenly items-center h-[calc(100vh-16rem)] relative">
         <aside className="bg-secondary bg-opacity-10 p-4 rounded-lg text-center max-w-xs">
           <h2 className="font-black text-3xl mb-4">Description</h2>
-          <p className="break-all">{session.user.description}</p>
+          <p className="break-all">{profile.description}</p>
         </aside>
         <aside className="flex flex-col gap-8 bg-secondary bg-opacity-10 p-4 rounded-lg text-center">
           {stats !== null ? (
