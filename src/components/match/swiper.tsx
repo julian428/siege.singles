@@ -2,6 +2,7 @@
 
 import { HateIcon, LikeIcon } from "@/lib/icons";
 import axios from "axios";
+import { useState } from "react";
 
 interface Props {
   name: string;
@@ -10,11 +11,14 @@ interface Props {
 }
 
 export default function Swiper({ name, uid, pid }: Props) {
+  const [loading, setLoading] = useState(false);
   const dislikeHandler = async () => {
+    setLoading(true);
     await axios.post("/api/swipe/left", { uid, pid });
     window.location.reload();
   };
   const likeHandler = async () => {
+    setLoading(true);
     await axios.post("/api/swipe/right", { uid, pid });
     window.location.reload();
   };
