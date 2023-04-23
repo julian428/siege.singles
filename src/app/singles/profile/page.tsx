@@ -25,7 +25,7 @@ export default async function ProfilePage() {
           />
         </div>
       </header>
-      <article className="font-mono mt-8 md:mt-0 px-4 md:px-0 text-xl flex flex-wrap justify-evenly items-center h-[calc(100vh-16rem)] relative">
+      <article className="font-mono mt-8 md:mt-0 px-4 md:px-0 text-xl flex gap-y-4 flex-wrap justify-evenly items-center h-[calc(100vh-16rem)]">
         <aside className="bg-secondary bg-opacity-10 p-4 rounded-lg text-center flex-grow max-w-sm">
           <h2 className="font-black text-3xl mb-4">Description</h2>
           <p className="break-all">{session.user.description}</p>

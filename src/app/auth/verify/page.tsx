@@ -14,7 +14,7 @@ export default async function VerifyPage() {
       <header className="text-center pt-8">
         <PageTitle label="Verify Email" />
       </header>
-      <main className="flex justify-center mt-24">
+      <main className="flex justify-center md:mt-24 mt-12">
         <VerifyEmailForm email={session!.user?.email} />
       </main>
     </>
