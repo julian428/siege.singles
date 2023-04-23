@@ -26,7 +26,8 @@ export default function Messages({ initialMessages, uid, cid }: Props) {
     pusherClient.subscribe(`chat-${cid}`);
 
     pusherClient.bind("incoming-message", (message: initMessage) => {
-      setMessages((prevState) => [...prevState, message]);
+      const newState = [...messages, message];
+      setMessages(newState);
     });
 
     return () => {
