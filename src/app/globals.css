@@ -21,4 +21,13 @@
   .no-scroll::-webkit-scrollbar {
     display: none;
   }
+
+  *::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ccd8df;
+    border-radius: 20px;
+  }
 }
