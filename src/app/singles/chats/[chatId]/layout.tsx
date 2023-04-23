@@ -49,7 +49,7 @@ export default async function ChatLayout({ children, params }: Props) {
   const stats = await getStats(friend.username);
 
   return (
-    <article className="flex w-full">
+    <article className="flex w-full md:h-screen">
       {children}
       <ChatNav
         friend={friend}

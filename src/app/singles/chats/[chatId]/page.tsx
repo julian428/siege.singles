@@ -36,7 +36,7 @@ export default async function ChatPage({ params }: Props) {
   });
   await prisma.$disconnect();
   return (
-    <article className="h-screen flex flex-col flex-grow">
+    <article className="h-[calc(100vh-56px)] md:h-screen flex flex-col flex-grow">
       <Messages
         initialMessages={messages}
         uid={session.user.id}

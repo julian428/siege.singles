@@ -36,7 +36,7 @@ export default function WriteMessage({ uid, cid, name, image }: Props) {
   };
 
   return (
-    <div className="bg-secondary bg-opacity-10 h-72 w-full px-8 py-4">
+    <div className="bg-secondary bg-opacity-10 md:h-72 w-full px-8 py-4">
       <div className="relative h-full max-w-xl m-auto">
         <textarea
           ref={messageRef}

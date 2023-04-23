@@ -13,24 +13,24 @@ export default async function ProfilePage() {
   const stats = await getStats(session.user.username);
   return (
     <article>
-      <header className="h-64 w-full bg-action relative">
-        <div className="absolute flex -bottom-14 right-4 items-center gap-8">
-          <h1 className="text-6xl">{session.user.name}</h1>
+      <header className="md:h-64 h-32 w-full bg-action relative">
+        <div className="absolute flex md:-bottom-14 -bottom-6 right-4 items-center gap-4 md:gap-8">
+          <h1 className="md:text-6xl text-3xl">{session.user.name}</h1>
           <Image
             src={session.user.image}
             alt={session.user.name + " profile picture"}
             width={100}
             height={100}
-            className="rounded-full w-48 h-48"
+            className="rounded-full md:w-48 md:h-48 w-24 h-24"
           />
         </div>
       </header>
-      <article className="font-mono text-xl flex justify-evenly items-center h-[calc(100vh-16rem)] relative">
-        <aside className="bg-secondary bg-opacity-10 p-4 rounded-lg text-center max-w-xs">
+      <article className="font-mono mt-8 md:mt-0 px-4 md:px-0 text-xl flex flex-wrap justify-evenly items-center h-[calc(100vh-16rem)] relative">
+        <aside className="bg-secondary bg-opacity-10 p-4 rounded-lg text-center flex-grow max-w-sm">
           <h2 className="font-black text-3xl mb-4">Description</h2>
           <p className="break-all">{session.user.description}</p>
         </aside>
-        <aside className="flex flex-col gap-8 bg-secondary bg-opacity-10 p-4 rounded-lg text-center">
+        <aside className="flex flex-col gap-8 bg-secondary bg-opacity-10 flex-grow max-w-sm items-center p-4 rounded-lg text-center">
           {stats !== null ? (
             <>
               <header className="flex flex-col items-center">

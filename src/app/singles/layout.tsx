@@ -39,9 +39,9 @@ export default async function SinglesLayout({ children }: Props) {
     return { id, image: friend!.image, name: friend!.name };
   });
   return (
-    <main className="flex h-screen overflow-hidden">
+    <main className="flex md:flex-row flex-col h-screen overflow-hidden">
       <SinglesNav userChats={chats} />
-      <article className="overflow-y-auto max-h-screen w-full">
+      <article className="overflow-y-auto overflow-x-hidden md:h-screen h-[calc(100vh-56px)] w-full">
         {children}
       </article>
     </main>

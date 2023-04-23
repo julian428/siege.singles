@@ -11,7 +11,7 @@ interface Props {
 
 export default function ChatNav({ friend, stats }: Props) {
   return (
-    <aside className="h-screen w-80 bg-secondary bg-opacity-10 flex flex-col items-center py-4 gap-8">
+    <aside className="h-screen w-80 bg-secondary bg-opacity-10 hidden md:flex flex-col items-center py-4 gap-8">
       <header className="flex flex-col gap-4 items-center">
         <Image
           src={friend.image}

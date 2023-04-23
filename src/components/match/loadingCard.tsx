@@ -5,7 +5,7 @@ export default function LoadingCard({ children }: { children?: ReactNode }) {
   return (
     <div>
       <article
-        className={`w-[512px] h-[512px] transition-all flex flex-col justify-center items-center ${
+        className={`md:w-[512px] md:h-[512px] w-[90vw] h-[90vw] transition-all flex flex-col justify-center items-center ${
           !children ? "animate-pulse" : "bg-opacity-50"
         } bg-secondary`}
       >

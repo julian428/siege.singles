@@ -55,7 +55,7 @@ export default function Card({ session }: Props) {
 
   return (
     <div>
-      <article className="w-[512px] h-[512px] relative">
+      <article className="md:w-[512px] md:h-[512px] w-[90vw] h-[90vw] relative">
         <Image
           src={user.image}
           alt={`${user.name} profile picture`}

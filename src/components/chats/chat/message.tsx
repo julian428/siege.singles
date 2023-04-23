@@ -23,7 +23,7 @@ export default function Message({ message, uid }: Props) {
       <article
         className={`${
           sentByUser ? "bg-action" : "bg-secondary"
-        } max-w-md rounded-lg px-4 text-main py-1 text-xl  break-all`}
+        } max-w-md rounded-lg md:px-4 px-2 text-main py-1 md:text-xl break-all`}
       >
         {message.message}
       </article>
@@ -32,7 +32,7 @@ export default function Message({ message, uid }: Props) {
         alt={message.User?.name + " profile picture"}
         width={100}
         height={100}
-        className="rounded-full w-16 h-16 self-end"
+        className="rounded-full md:w-16 md:h-16 h-8 w-8 self-end"
       />
     </section>
   );

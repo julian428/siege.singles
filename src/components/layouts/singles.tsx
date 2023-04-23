@@ -13,26 +13,26 @@ interface Props {
 
 export default function SinglesNav({ userChats }: Props) {
   return (
-    <nav className="w-96 bg-secondary bg-opacity-10 flex flex-col justify-between px-8 py-4">
+    <nav className="md:w-96 w-screen md:h-screen h-14 bg-secondary bg-opacity-10 flex md:flex-col justify-between px-4 py-2 md:px-8 md:py-4">
       <header>
         <Link
           href="/singles/match"
           className="flex items-center gap-4 text-2xl hover:text-action duration-500"
         >
           <MatchIcon className="text-4xl" />
-          <h2>Match</h2>
+          <h2 className="md:block hidden">Match</h2>
         </Link>
       </header>
-      <section className="flex flex-col gap-6 mb-4">
+      <section className="flex md:flex-col items-center md:items-start gap-6 md:mb-4">
         <section>
           <Link
             href="/singles/chats"
             className="flex items-center gap-4 text-2xl hover:text-action duration-500"
           >
             <ChatsIcon className="text-4xl" />
-            Chats
+            <p className="md:block hidden">Chats</p>
           </Link>
-          <section className="max-h-96 overflow-y-auto flex flex-col gap-2 items-start my-4 ml-2">
+          <section className="max-h-96 overflow-y-auto md:flex hidden flex-col gap-2 items-start my-4 ml-2">
             {userChats.map((chat) => (
               <Link
                 key={chat.id}
@@ -56,10 +56,11 @@ export default function SinglesNav({ userChats }: Props) {
           className="flex items-center gap-4 text-2xl hover:text-action duration-500"
         >
           <ProfileIcon className="text-4xl" />
-          Profile
+          <p className="md:block hidden">Profile</p>
         </Link>
         <SignOutButton className="flex items-center gap-4 text-2xl hover:text-action duration-500">
-          <SignoutIcon className="text-4xl" /> Sign out
+          <SignoutIcon className="text-4xl" />
+          <p className="md:block hidden">Sign out</p>
         </SignOutButton>
       </section>
     </nav>
