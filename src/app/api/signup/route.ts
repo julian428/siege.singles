@@ -23,7 +23,8 @@ export async function POST(req: Request) {
     if (!data.image) {
       const playerStats = await stats.rank("pc", username);
       if (typeof playerStats === "string") {
-        data.image = "";
+        data.image =
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.-GQtCHQqasmFzY3vAcYUDAAAAA%26pid%3DApi&f=1&ipt=0097032b650912b818b702ea3234271ff4ba04747329bd6f098aaccc5415af5d&ipo=images";
       } else {
         data.image = playerStats.header;
       }

@@ -11,7 +11,6 @@ import { LoadingIcon } from "@/lib/icons";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { sleep } from "@/lib/utils";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +23,7 @@ export default function SignUpForm() {
     try {
       await axios.post("/api/signup", data);
       toast.success("Successfully created user.");
-      signIn("credentials", {
+      await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,

@@ -2,7 +2,6 @@ import Image from "next/image";
 
 interface Props {
   message: {
-    createdat: Date;
     message: string;
     User: {
       id: number;

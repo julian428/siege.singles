@@ -7,9 +7,11 @@ import { useRef, useState } from "react";
 interface Props {
   uid: string;
   cid: string;
+  name: string;
+  image: string;
 }
 
-export default function WriteMessage({ uid, cid }: Props) {
+export default function WriteMessage({ uid, cid, name, image }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [isSending, setIsSending] = useState(false);
 
@@ -17,7 +19,7 @@ export default function WriteMessage({ uid, cid }: Props) {
     const message = messageRef.current?.value;
     if (!message) return;
     setIsSending(true);
-    await axios.post("/api/send-message", { uid, cid, message });
+    await axios.post("/api/send-message", { uid, cid, message, name, image });
     messageRef.current.value = "";
     setIsSending(false);
   };

@@ -1,28 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Message from "./message";
+import { pusherClient } from "@/lib/pusher";
 
-interface Props {
-  initialMessages: {
-    createdat: Date;
-    message: string;
-    User: {
-      id: number;
-      image: string;
-      name: string;
-    } | null;
-  }[];
-  uid: string;
+interface initMessage {
+  message: string;
+  User: {
+    id: number;
+    image: string;
+    name: string;
+  } | null;
 }
 
-export default function Messages({ initialMessages, uid }: Props) {
+interface Props {
+  initialMessages: initMessage[];
+  uid: string;
+  cid: string;
+}
+
+export default function Messages({ initialMessages, uid, cid }: Props) {
   const [messages, setMessages] = useState(initialMessages);
+
+  useEffect(() => {
+    pusherClient.subscribe(`chat-${cid}`);
+
+    pusherClient.bind("incoming-message", (message: initMessage) => {
+      setMessages((prevState) => [...prevState, message]);
+    });
+
+    return () => {
+      pusherClient.unsubscribe(`chat-${cid}`);
+    };
+  }, []);
+
   return (
     <article className="h-full w-full p-4 flex flex-col gap-8 max-h-full overflow-y-auto">
       {messages.map((message) => (
         <Message
-          key={message.createdat + ""}
+          key={message.User?.id + "" + Math.random()}
           message={message}
           uid={uid}
         />

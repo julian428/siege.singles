@@ -27,7 +27,6 @@ export default async function ChatPage({ params }: Props) {
           image: true,
         },
       },
-      createdat: true,
       message: true,
     },
   });
@@ -37,9 +36,12 @@ export default async function ChatPage({ params }: Props) {
       <Messages
         initialMessages={messages}
         uid={session.user.id}
+        cid={params.chatId}
       />
       <WriteMessage
         uid={session.user.id}
+        name={session.user.name}
+        image={session.user.image}
         cid={params.chatId}
       />
     </article>
