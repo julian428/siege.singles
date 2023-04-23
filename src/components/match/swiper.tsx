@@ -12,6 +12,7 @@ interface Props {
 
 export default function Swiper({ name, uid, pid }: Props) {
   const [loading, setLoading] = useState(false);
+
   const dislikeHandler = async () => {
     setLoading(true);
     await axios.post("/api/swipe/left", { uid, pid });
@@ -24,11 +25,17 @@ export default function Swiper({ name, uid, pid }: Props) {
   };
   return (
     <nav className="flex text-7xl justify-between p-8 items-center">
-      <button onClick={dislikeHandler}>
+      <button
+        disabled={loading}
+        onClick={dislikeHandler}
+      >
         <HateIcon />
       </button>
       <h3 className="text-3xl">{name}</h3>
-      <button onClick={likeHandler}>
+      <button
+        disabled={loading}
+        onClick={likeHandler}
+      >
         <LikeIcon />
       </button>
     </nav>

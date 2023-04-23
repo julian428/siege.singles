@@ -25,12 +25,15 @@ export default function Card({ session }: Props) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios({
+      const res = await fetch("/api/get-nonFriend", {
         method: "post",
-        url: `/api/get-nonFriend`,
-        data: { uid: session.user.id },
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uid: session.user.id }),
       });
-      setUser(res.data);
+      setUser(await res.json());
     };
     fetchUser();
   }, [session]);
