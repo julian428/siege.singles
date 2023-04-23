@@ -19,6 +19,17 @@ export function codeGen(length: number) {
   return code;
 }
 
+export function randomHexColor(opacity: boolean) {
+  const chars = "0123456789ABCDEF";
+  const length = opacity ? 8 : 6;
+  let hexCode = "";
+  for (let i = 0; i < length; i++) {
+    const randomNumber = Math.random() * chars.length;
+    hexCode += chars.charAt(randomNumber);
+  }
+  return hexCode;
+}
+
 export function formatTime(seconds: number) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;

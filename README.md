@@ -11,7 +11,7 @@
 1. ✅ landing
 2. ✅ login
 3. ✅ signup
-4. ❌ singles/match
-5. ❌ singles/chat
-6. ❌ singles/chat/**_[chatId]_**
+4. ✅ singles/match
+5. ✅ singles/chat
+6. ✅ singles/chat/**_[chatId]_**
 7. ❌ singles/profile/**_[userId]_**

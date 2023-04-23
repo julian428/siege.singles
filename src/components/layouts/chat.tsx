@@ -1,11 +1,12 @@
 import { FriendType } from "@/app/singles/chats/[chatId]/layout";
 import { DeathIcon, GameIcon, KillIcon, TimeIcon, WinIcon } from "@/lib/icons";
+import type { StatsType } from "@/lib/stats";
 import Image from "next/image";
-import { StatsRank } from "r6s-stats-api/types/rank";
+import Link from "next/link";
 
 interface Props {
   friend: FriendType;
-  stats: StatsRank | string;
+  stats: StatsType | null;
 }
 
 export default function ChatNav({ friend, stats }: Props) {
@@ -19,30 +20,36 @@ export default function ChatNav({ friend, stats }: Props) {
           height={100}
           className="rounded-full w-32 h-32"
         />
-        <h2 className="text-center capitalize text-3xl">{friend.name}</h2>
+        <Link href={`/singles/profile/${friend.name}`}>
+          <h2 className="text-center capitalize text-3xl duration-500 hover:text-action">
+            {friend.name}
+          </h2>
+        </Link>
       </header>
       <article className="text-center break-all">{friend.description}</article>
       <article className="mt-24 flex flex-col items-center gap-4 font-mono font-semibold">
-        {typeof stats !== "string" ? (
+        {stats !== null ? (
           <>
             <header className="flex flex-col items-center">
               <Image
-                src={stats.rank_img}
-                alt={stats.rank}
+                src={stats.rank.url}
+                alt={stats.rank.name}
                 width={80}
                 height={80}
               />
-              <p className="font-black tracking-wide text-xl">{stats.mmr}</p>
+              <p className="font-black tracking-wide text-xl">
+                {stats.rank.mmr}
+              </p>
             </header>
             <article className="flex flex-col items-center">
               <section className="flex items-center gap-2">
                 <GameIcon />
-                <p>{stats.matches}</p>
+                <p>{stats.games}</p>
               </section>
 
               <section className="flex items-center gap-2">
                 <WinIcon />
-                <p>{stats.win_}</p>
+                <p>{stats.wr}</p>
               </section>
               <section className="flex items-center gap-2">
                 <section className="flex">
@@ -54,11 +61,11 @@ export default function ChatNav({ friend, stats }: Props) {
                 <section className="flex">
                   <KillIcon /> <GameIcon />
                 </section>
-                <p>{stats.kills_match}</p>
+                <p>{stats.km}</p>
               </section>
               <section className="flex items-center gap-2">
                 <TimeIcon />
-                <p>{stats.time_played}</p>
+                <p>{stats.time}</p>
               </section>
             </article>
           </>

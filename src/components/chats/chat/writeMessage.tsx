@@ -30,9 +30,12 @@ export default function WriteMessage({ uid, cid, name, image }: Props) {
         <textarea
           ref={messageRef}
           disabled={isSending}
-          className="resize-none bg-transparent border-2 border-secondary rounded-lg p-2 outline-none text-secondary max-w-xl text-2xl w-full h-full pr-8 no-scroll"
+          className="resize-none focus:bg-action transition-colors duration-500 bg-secondary bg-opacity-75 rounded-lg p-2 z-10 outline-none text-main max-w-xl text-2xl w-full h-full pr-8 no-scroll"
         />
-        <button onClick={sendMessage}>
+        <button
+          onClick={sendMessage}
+          className="text-main"
+        >
           {isSending ? (
             <LoadingIcon className="animate-spin absolute right-1 bottom-3 text-2xl" />
           ) : (
