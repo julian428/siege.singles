@@ -27,9 +27,10 @@ model User {
 }
 
 model Chat {
-  id       String    @id @default(uuid())
-  messages Message[]
-  users    User[]    @relation("ChatUsers")
+  id        String    @id @default(uuid())
+  updatedat DateTime  @updatedAt
+  messages  Message[]
+  users     User[]    @relation("ChatUsers")
 }
 
 model Message {

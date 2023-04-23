@@ -3,6 +3,7 @@ import { signupSchema } from "@/validators/valid-signup";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 import { ZodError } from "zod";
+import stats from "r6s-stats-api";
 
 interface signupData {
   name?: string;
@@ -20,7 +21,12 @@ export async function POST(req: Request) {
     const { name, email, password, username, description } =
       signupSchema.parse(data);
     if (!data.image) {
-      data.image = "";
+      const playerStats = await stats.rank("pc", username);
+      if (typeof playerStats === "string") {
+        data.image = "";
+      } else {
+        data.image = playerStats.header;
+      }
     }
 
     await prisma.user.create({
