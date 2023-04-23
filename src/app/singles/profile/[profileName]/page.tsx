@@ -10,6 +10,10 @@ interface Props {
   };
 }
 
+export const metadata = {
+  title: "Siege Singles | Profile",
+};
+
 export default async function ProfilePage({ params }: Props) {
   const profile = await prisma.user.findUnique({
     where: {

@@ -5,6 +5,10 @@ import { type Session, getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Siege Singles | Chats",
+};
+
 export default async function ChatsPage() {
   const session = (await getServerSession(authOptions)) as Session;
   const chats = await prisma.chat.findMany({

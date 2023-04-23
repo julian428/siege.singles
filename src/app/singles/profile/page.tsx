@@ -4,6 +4,10 @@ import getStats from "@/lib/stats";
 import { type Session, getServerSession } from "next-auth";
 import Image from "next/image";
 
+export const metadata = {
+  title: "Siege Singles | Profile",
+};
+
 export default async function ProfilePage() {
   const session = (await getServerSession(authOptions)) as Session;
   const stats = await getStats(session.user.username);

@@ -10,6 +10,10 @@ interface Props {
   };
 }
 
+export const metadata = {
+  title: "Siege Siengles | Chat",
+};
+
 export default async function ChatPage({ params }: Props) {
   const session = (await getServerSession(authOptions)) as Session;
   const messages = await prisma.message.findMany({
