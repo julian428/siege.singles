@@ -2,7 +2,7 @@
 
 import { LoadingIcon, SendIcon } from "@/lib/icons";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
 
 interface Props {
   uid: string;
@@ -14,6 +14,17 @@ interface Props {
 export default function WriteMessage({ uid, cid, name, image }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [isSending, setIsSending] = useState(false);
+
+  const keyDownHandler = (event: KeyboardEvent) => {
+    if (event.shiftKey) return;
+    if (event.altKey) return;
+    if (event.ctrlKey) return;
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    const message = messageRef.current?.value;
+    if (!message || message.trim().length === 0) return;
+    sendMessage();
+  };
 
   const sendMessage = async () => {
     const message = messageRef.current?.value;
@@ -30,7 +41,8 @@ export default function WriteMessage({ uid, cid, name, image }: Props) {
         <textarea
           ref={messageRef}
           disabled={isSending}
-          className="resize-none focus:bg-action transition-colors duration-500 bg-secondary bg-opacity-75 rounded-lg p-2 z-10 outline-none text-main max-w-xl text-2xl w-full h-full pr-8 no-scroll"
+          onKeyDown={keyDownHandler}
+          className="resize-none transition-colors duration-500 bg-secondary bg-opacity-75 rounded-lg p-2 z-10 outline-none text-main max-w-xl text-2xl w-full h-full pr-8 no-scroll"
         />
         <button
           onClick={sendMessage}
