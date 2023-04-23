@@ -37,7 +37,7 @@ export default function SinglesNav({ userChats }: Props) {
               <Link
                 key={chat.id}
                 href={`/singles/chats/${chat.id}`}
-                className="flex gap-2 hover:bg-action transition-colors items-center px-2 py-1 rounded-lg"
+                className="flex gap-2 hover:bg-action transition-colors duration-500 items-center px-2 py-1 rounded-lg"
               >
                 <Image
                   src={chat.image}
